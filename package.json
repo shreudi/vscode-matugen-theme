@@ -1,108 +1,108 @@
 {
-  "name": "matugen-theme",
-  "displayName": "Matugen Theme",
-  "description": "A VSCode theme using Material You color palettes from Matugen",
-  "publisher": "haikalllp",
-  "author": "haikalllp",
-  "contributors": [
-    {
-      "name": "haikalllp"
-    }
-  ],
-  "license": "MIT",
-  "version": "1.0.2",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/haikalllp/vscode-matugen-theme"
-  },
-  "bugs": {
-    "url": "https://github.com/haikalllp/vscode-matugen-theme/issues"
-  },
-  "homepage": "https://github.com/haikalllp/vscode-matugen-theme#readme",
-  "engines": {
-    "vscode": "^1.100.0"
-  },
-  "extensionKind": [
-    "ui",
-    "workspace"
-  ],
-  "categories": [
-    "Themes"
-  ],
-  "keywords": [
-    "theme",
-    "matugen",
-    "wallpaper"
-  ],
-  "icon": "assets/icon.png",
-  "activationEvents": [
-    "onStartupFinished"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "matugenTheme.update",
-        "title": "Update Theme",
-        "category": "Matugen Theme",
-        "icon": "$(refresh)"
-      },
-      {
-        "command": "matugenTheme.clearCache",
-        "title": "Clear Cache",
-        "category": "Matugen Theme",
-        "icon": "$(trash)"
-      }
-    ],
-    "configuration": {
-      "title": "Matugen Theme",
-      "properties": {
-        "matugenTheme.autoUpdate": {
-          "type": "boolean",
-          "default": true,
-          "description": "Automatically update theme when matugen color palette changes. Uses file watching with polling fallback.",
-          "scope": "application"
+    "name": "matugen-theme",
+    "displayName": "Matugen Theme",
+    "description": "A VSCode theme using Material You color palettes from Matugen",
+    "publisher": "haikalllp",
+    "author": "haikalllp",
+    "contributors": [
+        {
+            "name": "haikalllp"
         }
-      }
+    ],
+    "license": "MIT",
+    "version": "1.0.3",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/haikalllp/vscode-matugen-theme"
     },
-    "themes": [
-      {
-        "label": "Matugen",
-        "uiTheme": "vs-dark",
-        "path": "./themes/matugen.json",
-        "_watch": true
-      },
-      {
-        "label": "Matugen Bordered",
-        "uiTheme": "vs-dark",
-        "path": "./themes/matugen-bordered.json",
-        "_watch": true
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile",
-    "lint": "eslint src",
-    "format": "prettier --write src",
-    "format:check": "prettier --check src",
-    "clean": "rm -rf out node_modules"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/color": "^3.0.2",
-    "@types/node": "^22.19.17",
-    "@types/vscode": "^1.100.0",
-    "eslint": "^9.39.4",
-    "eslint-config-prettier": "^10.1.8",
-    "prettier": "^3.8.3",
-    "typescript": "^5.3.0",
-    "typescript-eslint": "^8.59.1"
-  },
-  "dependencies": {
-    "chokidar": "^3.5.2",
-    "color": "^3.1.3"
-  }
+    "bugs": {
+        "url": "https://github.com/haikalllp/vscode-matugen-theme/issues"
+    },
+    "homepage": "https://github.com/haikalllp/vscode-matugen-theme#readme",
+    "engines": {
+        "vscode": "^1.100.0"
+    },
+    "extensionKind": [
+        "ui",
+        "workspace"
+    ],
+    "categories": [
+        "Themes"
+    ],
+    "keywords": [
+        "theme",
+        "matugen",
+        "wallpaper"
+    ],
+    "icon": "assets/icon.png",
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "matugenTheme.update",
+                "title": "Update Theme",
+                "category": "Matugen Theme",
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "matugenTheme.clearCache",
+                "title": "Clear Cache",
+                "category": "Matugen Theme",
+                "icon": "$(trash)"
+            }
+        ],
+        "configuration": {
+            "title": "Matugen Theme",
+            "properties": {
+                "matugenTheme.autoUpdate": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically update theme when matugen color palette changes. Uses file watching with polling fallback.",
+                    "scope": "application"
+                }
+            }
+        },
+        "themes": [
+            {
+                "label": "Matugen",
+                "uiTheme": "vs-dark",
+                "path": "./themes/matugen.json",
+                "_watch": true
+            },
+            {
+                "label": "Matugen Bordered",
+                "uiTheme": "vs-dark",
+                "path": "./themes/matugen-bordered.json",
+                "_watch": true
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile",
+        "lint": "eslint src",
+        "format": "prettier --write src",
+        "format:check": "prettier --check src",
+        "clean": "rm -rf out node_modules"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.39.4",
+        "@types/color": "^3.0.2",
+        "@types/node": "^22.19.17",
+        "@types/vscode": "^1.100.0",
+        "eslint": "^9.39.4",
+        "eslint-config-prettier": "^10.1.8",
+        "prettier": "^3.8.3",
+        "typescript": "^5.3.0",
+        "typescript-eslint": "^8.59.1"
+    },
+    "dependencies": {
+        "chokidar": "^3.5.2",
+        "color": "^3.1.3"
+    }
 }
