@@ -104,6 +104,23 @@ function ensureContrast(fg: Color, bg: Color, minContrast = 4.5): Color {
 }
 
 /**
+ * Fades a color toward the background as far as it can go while keeping a
+ * minimum contrast ratio against every background it is drawn on: the dimmest
+ * still-readable version.
+ */
+function fadeToContrast(fg: Color, backgrounds: Color[], minContrast = 4.5): Color {
+    let faded = fg;
+    for (let weight = 0.05; weight < 1; weight += 0.05) {
+        const candidate = fg.mix(backgrounds[0], weight);
+        if (backgrounds.some((bg) => candidate.contrast(bg) < minContrast)) {
+            break;
+        }
+        faded = candidate;
+    }
+    return faded;
+}
+
+/**
  * Adjusts a color for visibility on the given background.
  * Makes colors darker on light backgrounds, lighter on dark backgrounds.
  */
@@ -155,6 +172,7 @@ function createSemanticColors(colors: Color[], isDark: boolean): SemanticColors 
 
     // Create muted foreground
     const fgMuted = isDark ? fg.darken(0.3) : fg.lighten(0.4);
+    const bgElevated = elevateBackground(bg, !isDark);
 
     // Adjust all accent colors for the background
     const adjustColor = (c: Color) => ensureContrast(adjustForBackground(c, bg), bg, 4.5);
@@ -162,7 +180,7 @@ function createSemanticColors(colors: Color[], isDark: boolean): SemanticColors 
     return {
         // Base colors
         bg,
-        bgElevated: elevateBackground(bg, !isDark),
+        bgElevated,
         bgHighlight: highlightBackground(bg, !isDark),
         fg,
         fgMuted,
@@ -191,7 +209,9 @@ function createSemanticColors(colors: Color[], isDark: boolean): SemanticColors 
         added: adjustColor(colors[2]),
         modified: adjustColor(colors[3]),
         deleted: adjustColor(colors[1]),
-        ignored: fgMuted,
+        // Clearly dimmer than normal file names, but still readable, on the
+        // editor (tabs) and on the sidebar (explorer).
+        ignored: fadeToContrast(fg, [bg, bgElevated]),
     };
 }
 
@@ -399,7 +419,7 @@ export default (colors: Color[], bordered: boolean) => {
             // Sidebar
             // ================================================================
             'sideBar.background': (bordered ? semantic.bg : semantic.bgElevated).hex(),
-            'sideBar.foreground': semantic.fg.hex() + alpha.muted,
+            'sideBar.foreground': semantic.fg.hex(),
             'sideBar.border': bordered
                 ? semantic.fgMuted.hex() + alpha.faint
                 : semantic.bgElevated.hex(),
@@ -837,7 +857,7 @@ export default (colors: Color[], bordered: boolean) => {
             'gitDecoration.stageModifiedResourceForeground': semantic.modified.hex(),
             'gitDecoration.stageDeletedResourceForeground': semantic.deleted.hex(),
             'gitDecoration.untrackedResourceForeground': semantic.success.hex(),
-            'gitDecoration.ignoredResourceForeground': semantic.ignored.hex() + alpha.dimmed,
+            'gitDecoration.ignoredResourceForeground': semantic.ignored.hex(),
             'gitDecoration.conflictingResourceForeground': semantic.error.hex(),
             'gitDecoration.submoduleResourceForeground': semantic.info.hex(),
 
